@@ -1,0 +1,21 @@
+name: .Net git actions
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['3.1.x', '6.0.x']
+
+    steps:
+      - uses: actions/checkout@4
+      - name: Setup dotnet ${{ matrix.dotnet-version }}
+      - uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Display dotnet dotnet-version
+        run: dotnet --version
